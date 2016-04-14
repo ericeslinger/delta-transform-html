@@ -1,2 +1,2 @@
-require('./clean');
 require('./scripts');
+require('./test');

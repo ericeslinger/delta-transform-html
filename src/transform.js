@@ -1,12 +1,34 @@
 import { Registry } from './registry';
 
-import { BoldFormat } from './bold';
-
-Registry.bold = BoldFormat;
-
-export function registerFormat(type, formatter) {
-  Registry[type] = formatter;
+export function registerNodeType(type, nodeType) {
+  Registry[type] = nodeType;
 }
+
+export function getNodeType(type) {
+  return Registry[type];
+}
+
+import BoldNode from './miniDOM/bold';
+import ItalicNode from './miniDOM/italic';
+import LinkNode from './miniDOM/link';
+import ListItemNode from './miniDOM/listItem';
+import OrderedListNode from './miniDOM/orderedList';
+import ParagraphNode from './miniDOM/paragraph';
+import TextNode from './miniDOM/text';
+import TreeNode from './miniDOM/treeNode';
+import RootNode from './miniDOM/root';
+import UnorderedListNode from './miniDOM/unorderedList';
+
+registerNodeType('bold', BoldNode);
+registerNodeType('italic', ItalicNode);
+registerNodeType('link', LinkNode);
+registerNodeType('listItem', ListItemNode);
+registerNodeType('ordered', OrderedListNode);
+registerNodeType('paragraph', ParagraphNode);
+registerNodeType('text', TextNode);
+registerNodeType('TreeNode', TreeNode);
+registerNodeType('RootNode', RootNode);
+registerNodeType('bullet', UnorderedListNode);
 
 function tokenize(ops) {
   const retVal = [];
@@ -50,36 +72,52 @@ function tokenize(ops) {
   return retVal;
 }
 
-function assembleLines(tokens) {
+function createBlocks(tokens) {
   const retVal = [];
-  let currentLine = [];
+  let currentBlock = null;
   tokens.forEach((token) => {
+    if (currentBlock === null) {
+      currentBlock = {type: 'unknown', children: []};
+    }
     if (token.type === 'linebreak') {
-      retVal.push({
-        lineAttributes: token.attributes,
-        elements: currentLine,
-      });
-      currentLine = [];
+      if (token.attributes.list === 'bullet') {
+        currentBlock.type = 'bullet';
+      } else if (token.attributes.list === 'ordered') {
+        currentBlock.type = 'ordered';
+      } else {
+        currentBlock.type = 'paragraph';
+      }
+      retVal.push(currentBlock);
+      currentBlock = null;
     } else {
-      currentLine.push(token);
+      currentBlock.children.push(token);
     }
   });
-  if (currentLine.length) {
-    retVal.push({
-      lineAttributes: {},
-      elements: currentLine,
-    });
-  }
   return retVal;
 }
 
+function assembleLines(blocks) {
+  const retVal = new RootNode();
+  blocks.forEach((block) => {
+    const blockNode = new Registry[block.type](block);
+    retVal.absorb(blockNode);
+    block.children.forEach((child) => {
+      blockNode.appendChild(TreeNode.build(child));
+    });
+  });
+  return retVal;
+}
+
+export function transform(delta) {
+  return assembleLines(createBlocks(tokenize(delta.ops))).toHTML();
+}
 
 export function testDeltas() {
   const testVal = {
     ops: [
       {insert: 'multiline \n value'},
       {insert: '\n'},
-      {insert: 'bulleted list one'},
+      {insert: 'bulleted list one', attributes: {link: 'linkTarget'}},
       {insert: '\n', attributes: {list: 'bullet'}},
       {insert: 'bulleted list two'},
       {insert: '\n', attributes: {list: 'bullet'}},
@@ -97,7 +135,5 @@ export function testDeltas() {
       {insert: '\n'},
     ],
   };
-  console.log(JSON.stringify(assembleLines(tokenize(testVal.ops)), null, 2));
+  console.log(transform(testVal));
 }
-
-testDeltas();

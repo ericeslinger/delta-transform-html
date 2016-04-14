@@ -4,12 +4,12 @@ A transformer that pulls in ottypes/rich-text Deltas and emits HTML.
 This is still under heavy development, and not guaranteed to work yet. Use at your own risk.
 
 ## supported formats:
-- [ ] plain text
-- [ ] unordered list
-- [ ] ordered list
+- [x] plain text
+- [x] unordered list
+- [x] ordered list
 - [ ] multilevel lists
-- [ ] bold
-- [ ] italic
+- [x] bold
+- [x] italic
 - [ ] underscore
 - [ ] superscript
 - [ ] subscript
@@ -17,7 +17,7 @@ This is still under heavy development, and not guaranteed to work yet. Use at yo
 - [ ] strikethrough
 - [ ] color
 - [ ] background-color
-- [ ] link
+- [x] link
 
 ## interface:
 
