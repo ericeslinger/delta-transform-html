@@ -12,4 +12,4 @@ export default class LinkNode extends SpanNode {
   }
 }
 
-LinkNode.priority = 10;
+LinkNode.priority = 11;

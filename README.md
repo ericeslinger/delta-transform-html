@@ -11,8 +11,8 @@ This is still under heavy development, and not guaranteed to work yet. Use at yo
 - [x] bold
 - [x] italic
 - [x] underscore
-- [ ] superscript
-- [ ] subscript
+- [x] superscript
+- [x] subscript
 - [ ] preformatted
 - [x] strikethrough
 - [x] color
@@ -26,26 +26,26 @@ This is still under heavy development, and not guaranteed to work yet. Use at yo
       ops: [
         {insert: 'multiline \n value'},
         {insert: '\n'},
-        {insert: 'bulleted list one'},
-        {insert: '\n', attributes: {list: 'bullet'}},
-        {insert: 'bulleted list two'},
-        {insert: '\n', attributes: {list: 'bullet'}},
-        {insert: 'bulleted list three'},
-        {insert: '\n', attributes: {list: 'bullet'}},
-        {insert: 'numbered list one'},
-        {insert: '\n', attributes: {list: 'ordered'}},
-        {insert: 'numbered list two'},
-        {insert: '\n', attributes: {list: 'ordered'}},
-        {insert: 'numbered list three'},
-        {insert: '\n', attributes: {list: 'ordered'}},
-        {insert: 'bold multiline\nvalue', attributes: {bold: true}},
-        {insert: 'italic value', attributes: {italic: true}},
-        {insert: 'bold-italic value', attributes: {bold: true, italic: true}},
-        {insert: '\n'},
       ],
     };
     var htmlString = transformer.transform(testVal);
 
-One can register custom formats by calling `transformer.registerFormat('formatName', FormatterClass);`
-FormatterClass needs to expose an openTag and closeTag method, and will be passed the operation itself
-in the constructor.
+One can register custom formats by calling `transformer.Registry.add('formatName', FormatterClass);`
+
+FormatterClass should look a bit like:
+
+    const TreeNode = transformer.Registry.get('TreeNode');
+    class FormatterClass extends TreeNode {
+      openTag() {
+        return '<some-tag>';
+      }
+      closeTag() {
+        return '</some-tag>';
+      }
+    }
+    FormatterClass.priority = 44
+
+Note that there's a special node type (text.js) that handles the actual text content in the token.
+The priority value on the constructor is used to figure out a stable inside - outside order. Given
+a text node like `{insert: 'foo', attributes: {bold: true, italic: true}}`, the `<em>` tag will
+always be outside the `<strong>` tag, because the priority on ItalicNode is 2 and BoldNode is 1.
