@@ -1,3 +1,5 @@
+//shamelessly taken and tweaked from the airbnb eslintrc
+
 module.exports = {
   'env': {
     'es6': true,
