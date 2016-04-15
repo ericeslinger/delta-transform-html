@@ -1,6 +1,6 @@
 {
   "name": "delta-transform-html",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A package for converting ottypes/rich-text Deltas to an HTML string",
   "main": "dist/transform.js",
   "scripts": {
