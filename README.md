@@ -15,8 +15,8 @@ This is still under heavy development, and not guaranteed to work yet. Use at yo
 - [ ] subscript
 - [ ] preformatted
 - [x] strikethrough
-- [ ] color
-- [ ] background-color
+- [x] color
+- [x] background-color
 - [x] link
 
 ## interface:

@@ -17,6 +17,8 @@ import UnderlineNode from './miniDOM/underline';
 import StrikethroughNode from './miniDOM/strikethrough';
 import ColorNode from './miniDOM/color';
 import BackgroundColorNode from './miniDOM/bgcolor';
+import SuperscriptNode from './miniDOM/superscript';
+import SubscriptNode from './miniDOM/subscript';
 
 Registry.add('bold', BoldNode);
 Registry.add('italic', ItalicNode);
@@ -33,6 +35,8 @@ Registry.add('underline', UnderlineNode);
 Registry.add('strikethrough', StrikethroughNode);
 Registry.add('color', ColorNode);
 Registry.add('bgcolor', BackgroundColorNode);
+Registry.add('subscript', SuperscriptNode);
+Registry.add('superscript', SubscriptNode);
 
 function tokenize(ops) {
   const retVal = [];
@@ -131,6 +135,17 @@ export function testDeltas() {
       {insert: 'red', attributes: {color: 'red'}},
       {insert: 'bgred', attributes: {bg: 'red'}},
       {insert: 'strikethru', attributes: {strike: true}},
+      {insert: '\n'},
+      {insert: 'going NUTS', attributes: {
+        italic: true,
+        bold: true,
+        sub: true,
+        super: true,
+        bg: '#000000',
+        color: '#ffffff',
+        strike: true,
+        underline: true,
+      }},
       {insert: '\n'},
       {insert: 'bold multiline\nvalue', attributes: {bold: true}},
       {insert: 'italic value', attributes: {italic: true}},
