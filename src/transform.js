@@ -136,6 +136,8 @@ export function testDeltas() {
       {insert: 'bgred', attributes: {bg: 'red'}},
       {insert: 'strikethru', attributes: {strike: true}},
       {insert: '\n'},
+      {insert: 'escaped HTML & < > " \' &'},
+      {insert: '\n'},
       {insert: 'going NUTS', attributes: {
         italic: true,
         bold: true,
