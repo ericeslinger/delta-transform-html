@@ -1,4 +1,4 @@
-import { Registry } from '../registry';
+import * as Registry from '../registry';
 export default class TreeNode {
   constructor(opts = {}) {
     this.children = [];
@@ -19,11 +19,11 @@ export default class TreeNode {
     return '';
   }
 
-  toHTML() {
+  toHTML(indentLevel = 0) {
     if (this.isLeaf()) {
-      return  `${this.openTag()}${this.contents}${this.closeTag()}`;
+      return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}${this.contents}${this.closeTag()}`; // eslint-disable-line max-len
     } else {
-      return `${this.openTag()}\n${this.children.map((c) => c.toHTML()).join('\n')}\n${this.closeTag()}`;
+      return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}\n${this.children.map((c) => c.toHTML(indentLevel + 2)).join('\n')}\n${new Array(indentLevel + 1).join(' ')}${this.closeTag()}`; // eslint-disable-line max-len
     }
   }
 
@@ -51,14 +51,9 @@ export default class TreeNode {
   }
 
   static build(token) {
-    const formatList = Object.keys(Registry).map((key) => {
-      if (Registry[key].matches(token)) {
-        return new Registry[key](token);
-      } else {
-        return null;
-      }
-    }).filter((i) => !!i)
-    .sort((a, b) => b.priority - a.priority);
+    const formatList = Registry.listFormats()
+    .filter((format) => format.matches(token))
+    .map((N) => new N(token));
     if (formatList.length === 0) {
       throw new Error('token has no matching formats');
     }
@@ -78,3 +73,5 @@ export default class TreeNode {
     return false;
   }
 }
+
+TreeNode.priority = -2;

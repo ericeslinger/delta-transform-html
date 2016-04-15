@@ -1,12 +1,6 @@
-import { Registry } from './registry';
+import * as Reg from './registry';
 
-export function registerNodeType(type, nodeType) {
-  Registry[type] = nodeType;
-}
-
-export function getNodeType(type) {
-  return Registry[type];
-}
+export const Registry = Reg;
 
 import BoldNode from './miniDOM/bold';
 import ItalicNode from './miniDOM/italic';
@@ -18,17 +12,27 @@ import TextNode from './miniDOM/text';
 import TreeNode from './miniDOM/treeNode';
 import RootNode from './miniDOM/root';
 import UnorderedListNode from './miniDOM/unorderedList';
+import HeaderNode from './miniDOM/header';
+import UnderlineNode from './miniDOM/underline';
+import StrikethroughNode from './miniDOM/strikethrough';
+import ColorNode from './miniDOM/color';
+import BackgroundColorNode from './miniDOM/bgcolor';
 
-registerNodeType('bold', BoldNode);
-registerNodeType('italic', ItalicNode);
-registerNodeType('link', LinkNode);
-registerNodeType('listItem', ListItemNode);
-registerNodeType('ordered', OrderedListNode);
-registerNodeType('paragraph', ParagraphNode);
-registerNodeType('text', TextNode);
-registerNodeType('TreeNode', TreeNode);
-registerNodeType('RootNode', RootNode);
-registerNodeType('bullet', UnorderedListNode);
+Registry.add('bold', BoldNode);
+Registry.add('italic', ItalicNode);
+Registry.add('link', LinkNode);
+Registry.add('listItem', ListItemNode);
+Registry.add('ordered', OrderedListNode);
+Registry.add('paragraph', ParagraphNode);
+Registry.add('text', TextNode);
+Registry.add('TreeNode', TreeNode);
+Registry.add('RootNode', RootNode);
+Registry.add('bullet', UnorderedListNode);
+Registry.add('header', HeaderNode);
+Registry.add('underline', UnderlineNode);
+Registry.add('strikethrough', StrikethroughNode);
+Registry.add('color', ColorNode);
+Registry.add('bgcolor', BackgroundColorNode);
 
 function tokenize(ops) {
   const retVal = [];
@@ -73,43 +77,34 @@ function tokenize(ops) {
 }
 
 function createBlocks(tokens) {
-  const retVal = [];
-  let currentBlock = null;
+  const retVal = new RootNode();
+  let childList = [];
   tokens.forEach((token) => {
-    if (currentBlock === null) {
-      currentBlock = {type: 'unknown', children: []};
-    }
     if (token.type === 'linebreak') {
-      if (token.attributes.list === 'bullet') {
-        currentBlock.type = 'bullet';
-      } else if (token.attributes.list === 'ordered') {
-        currentBlock.type = 'ordered';
-      } else {
-        currentBlock.type = 'paragraph';
-      }
-      retVal.push(currentBlock);
-      currentBlock = null;
+      const currentBlock = new (Registry.listFormats().filter((f) => f.matches(token))[0])(token);
+      childList.forEach((child) => currentBlock.appendChild(TreeNode.build(child)));
+      retVal.absorb(currentBlock);
+      childList = [];
     } else {
-      currentBlock.children.push(token);
+      childList.push(token);
     }
   });
   return retVal;
 }
 
-function assembleLines(blocks) {
-  const retVal = new RootNode();
-  blocks.forEach((block) => {
-    const blockNode = new Registry[block.type](block);
-    retVal.absorb(blockNode);
-    block.children.forEach((child) => {
-      blockNode.appendChild(TreeNode.build(child));
-    });
-  });
-  return retVal;
-}
+// function assembleLines(blocks) {
+//   blocks.forEach((block) => {
+//     const blockNode = new block.Type(block); // eslint-disable-line new-cap
+//     retVal.absorb(blockNode);
+//     block.children.forEach((child) => {
+//       blockNode.appendChild(TreeNode.build(child));
+//     });
+//   });
+//   return retVal;
+// }
 
 export function transform(delta) {
-  return assembleLines(createBlocks(tokenize(delta.ops))).toHTML();
+  return createBlocks(tokenize(delta.ops)).toHTML();
 }
 
 export function testDeltas() {
@@ -129,11 +124,21 @@ export function testDeltas() {
       {insert: '\n', attributes: {list: 'ordered'}},
       {insert: 'numbered list three'},
       {insert: '\n', attributes: {list: 'ordered'}},
+      {insert: 'header two'},
+      {insert: '\n', attributes: {header: 2}},
+      {insert: 'underlined header one', attributes: {underline: true}},
+      {insert: '\n', attributes: {header: 1}},
+      {insert: 'red', attributes: {color: 'red'}},
+      {insert: 'bgred', attributes: {bg: 'red'}},
+      {insert: 'strikethru', attributes: {strike: true}},
+      {insert: '\n'},
       {insert: 'bold multiline\nvalue', attributes: {bold: true}},
       {insert: 'italic value', attributes: {italic: true}},
       {insert: 'bold-italic value', attributes: {bold: true, italic: true}},
       {insert: '\n'},
     ],
   };
+  console.log('testing uniqueness on sort keys');
+  Registry.checkPriorities();
   console.log(transform(testVal));
 }

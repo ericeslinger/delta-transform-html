@@ -10,11 +10,11 @@ This is still under heavy development, and not guaranteed to work yet. Use at yo
 - [ ] multilevel lists
 - [x] bold
 - [x] italic
-- [ ] underscore
+- [x] underscore
 - [ ] superscript
 - [ ] subscript
 - [ ] preformatted
-- [ ] strikethrough
+- [x] strikethrough
 - [ ] color
 - [ ] background-color
 - [x] link

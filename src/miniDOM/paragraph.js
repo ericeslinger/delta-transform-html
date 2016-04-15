@@ -14,7 +14,10 @@ export default class ParagraphNode extends BlockNode {
     return (
       (token.type === 'linebreak') && (
         (!!token.attributes) ||
-        ((token.attributes.list !== 'bullet') && (token.attributes.list !== 'ordered'))
+        (
+          (token.attributes.list === undefined) &&
+          (token.attributes.header === undefined)
+        )
       )
     );
   }

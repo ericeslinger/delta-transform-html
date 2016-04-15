@@ -18,24 +18,24 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ParagraphNode = function (_BlockNode) {
-  _inherits(ParagraphNode, _BlockNode);
+var HeaderNode = function (_BlockNode) {
+  _inherits(HeaderNode, _BlockNode);
 
-  function ParagraphNode() {
-    _classCallCheck(this, ParagraphNode);
+  function HeaderNode() {
+    _classCallCheck(this, HeaderNode);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ParagraphNode).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(HeaderNode).apply(this, arguments));
   }
 
-  _createClass(ParagraphNode, [{
+  _createClass(HeaderNode, [{
     key: 'openTag',
     value: function openTag() {
-      return '<p>';
+      return '<h' + this.attributes.header + '>';
     }
   }, {
     key: 'closeTag',
     value: function closeTag() {
-      return '</p>';
+      return '</h' + this.attributes.header + '>';
     }
   }, {
     key: 'absorb',
@@ -47,15 +47,15 @@ var ParagraphNode = function (_BlockNode) {
     value: function matches() {
       var token = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-      return token.type === 'linebreak' && (!!token.attributes || token.attributes.list === undefined && token.attributes.header === undefined);
+      return token.type === 'linebreak' && token.attributes.header;
     }
   }]);
 
-  return ParagraphNode;
+  return HeaderNode;
 }(_block2.default);
 
-exports.default = ParagraphNode;
+exports.default = HeaderNode;
 
 
-ParagraphNode.priority = 19;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1pbmlET00vcGFyYWdyYXBoLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7Ozs7Ozs7Ozs7OztJQUVxQjs7Ozs7Ozs7Ozs7OEJBQ1Q7QUFDUixhQUFPLEtBQVAsQ0FEUTs7OzsrQkFHQztBQUNULGFBQU8sTUFBUCxDQURTOzs7OzJCQUdKLE9BQU87QUFDWixhQUFPLEtBQVAsQ0FEWTs7Ozs4QkFHYTtVQUFaLDhEQUFRLGtCQUFJOztBQUN6QixhQUNFLEtBQUMsQ0FBTSxJQUFOLEtBQWUsV0FBZixLQUNDLENBQUUsQ0FBQyxNQUFNLFVBQU4sSUFFRCxLQUFDLENBQU0sVUFBTixDQUFpQixJQUFqQixLQUEwQixTQUExQixJQUNBLE1BQU0sVUFBTixDQUFpQixNQUFqQixLQUE0QixTQUE1QixDQUpMLENBRnVCOzs7O1NBVlI7Ozs7OztBQXVCckIsY0FBYyxRQUFkLEdBQXlCLEVBQXpCIiwiZmlsZSI6Im1pbmlET00vcGFyYWdyYXBoLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEJsb2NrTm9kZSBmcm9tICcuL2Jsb2NrJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgUGFyYWdyYXBoTm9kZSBleHRlbmRzIEJsb2NrTm9kZSB7XG4gIG9wZW5UYWcoKSB7XG4gICAgcmV0dXJuICc8cD4nO1xuICB9XG4gIGNsb3NlVGFnKCkge1xuICAgIHJldHVybiAnPC9wPic7XG4gIH1cbiAgYWJzb3JiKGNoaWxkKSB7XG4gICAgcmV0dXJuIGNoaWxkO1xuICB9XG4gIHN0YXRpYyBtYXRjaGVzKHRva2VuID0ge30pIHtcbiAgICByZXR1cm4gKFxuICAgICAgKHRva2VuLnR5cGUgPT09ICdsaW5lYnJlYWsnKSAmJiAoXG4gICAgICAgICghIXRva2VuLmF0dHJpYnV0ZXMpIHx8XG4gICAgICAgIChcbiAgICAgICAgICAodG9rZW4uYXR0cmlidXRlcy5saXN0ID09PSB1bmRlZmluZWQpICYmXG4gICAgICAgICAgKHRva2VuLmF0dHJpYnV0ZXMuaGVhZGVyID09PSB1bmRlZmluZWQpXG4gICAgICAgIClcbiAgICAgIClcbiAgICApO1xuICB9XG59XG5cblBhcmFncmFwaE5vZGUucHJpb3JpdHkgPSAxOTtcbiJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
+HeaderNode.priority = 21;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1pbmlET00vaGVhZGVyLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7Ozs7Ozs7Ozs7OztJQUVxQjs7Ozs7Ozs7Ozs7OEJBQ1Q7QUFDUixvQkFBWSxLQUFLLFVBQUwsQ0FBZ0IsTUFBaEIsTUFBWixDQURROzs7OytCQUdDO0FBQ1QscUJBQWEsS0FBSyxVQUFMLENBQWdCLE1BQWhCLE1BQWIsQ0FEUzs7OzsyQkFHSixPQUFPO0FBQ1osYUFBTyxLQUFQLENBRFk7Ozs7OEJBR2E7VUFBWiw4REFBUSxrQkFBSTs7QUFDekIsYUFDRSxLQUFDLENBQU0sSUFBTixLQUFlLFdBQWYsSUFBZ0MsTUFBTSxVQUFOLENBQWlCLE1BQWpCLENBRlY7Ozs7U0FWUjs7Ozs7O0FBaUJyQixXQUFXLFFBQVgsR0FBc0IsRUFBdEIiLCJmaWxlIjoibWluaURPTS9oZWFkZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQmxvY2tOb2RlIGZyb20gJy4vYmxvY2snO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBIZWFkZXJOb2RlIGV4dGVuZHMgQmxvY2tOb2RlIHtcbiAgb3BlblRhZygpIHtcbiAgICByZXR1cm4gYDxoJHt0aGlzLmF0dHJpYnV0ZXMuaGVhZGVyfT5gO1xuICB9XG4gIGNsb3NlVGFnKCkge1xuICAgIHJldHVybiBgPC9oJHt0aGlzLmF0dHJpYnV0ZXMuaGVhZGVyfT5gO1xuICB9XG4gIGFic29yYihjaGlsZCkge1xuICAgIHJldHVybiBjaGlsZDtcbiAgfVxuICBzdGF0aWMgbWF0Y2hlcyh0b2tlbiA9IHt9KSB7XG4gICAgcmV0dXJuIChcbiAgICAgICh0b2tlbi50eXBlID09PSAnbGluZWJyZWFrJykgJiYgKHRva2VuLmF0dHJpYnV0ZXMuaGVhZGVyKVxuICAgICk7XG4gIH1cbn1cblxuSGVhZGVyTm9kZS5wcmlvcml0eSA9IDIxO1xuIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
