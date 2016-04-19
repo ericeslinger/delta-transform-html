@@ -29,7 +29,7 @@ export default class TextNode extends SpanNode {
   }
 
   static matches(token = {}) {
-    return !!token.contents;
+    return ((token.contents) && (typeof token.contents === 'string'));
   }
 }
 

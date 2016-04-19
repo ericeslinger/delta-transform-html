@@ -21,6 +21,7 @@ import SuperscriptNode from './miniDOM/superscript';
 import SubscriptNode from './miniDOM/subscript';
 import SpanNode from './miniDOM/span';
 import BlockNode from './miniDOM/block';
+import ImageNode from './miniDOM/image';
 
 Registry.add('bold', BoldNode);
 Registry.add('italic', ItalicNode);
@@ -41,6 +42,7 @@ Registry.add('subscript', SuperscriptNode);
 Registry.add('superscript', SubscriptNode);
 Registry.add('SpanNode', SpanNode);
 Registry.add('BlockNode', BlockNode);
+Registry.add('image', ImageNode);
 
 function tokenize(ops) {
   const retVal = [];
@@ -140,6 +142,7 @@ export function testDeltas() {
       {insert: 'bgred', attributes: {bg: 'red'}},
       {insert: 'strikethru', attributes: {strike: true}},
       {insert: '\n'},
+      {insert: {image: 'IMAGEURL'}},
       {insert: 'escaped HTML & < > " \' &'},
       {insert: '\n'},
       {insert: 'going NUTS', attributes: {

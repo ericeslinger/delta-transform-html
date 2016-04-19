@@ -16,3 +16,5 @@ export default class BlockNode extends TreeNode {
     }
   }
 }
+
+BlockNode.priority = 101;

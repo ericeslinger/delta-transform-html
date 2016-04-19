@@ -14,3 +14,4 @@ export default class SpanNode extends TreeNode {
     }
   }
 }
+SpanNode.priority = 100;
