@@ -19,6 +19,8 @@ import ColorNode from './miniDOM/color';
 import BackgroundColorNode from './miniDOM/bgcolor';
 import SuperscriptNode from './miniDOM/superscript';
 import SubscriptNode from './miniDOM/subscript';
+import SpanNode from './miniDOM/span';
+import BlockNode from './miniDOM/block';
 
 Registry.add('bold', BoldNode);
 Registry.add('italic', ItalicNode);
@@ -37,6 +39,8 @@ Registry.add('color', ColorNode);
 Registry.add('bgcolor', BackgroundColorNode);
 Registry.add('subscript', SuperscriptNode);
 Registry.add('superscript', SubscriptNode);
+Registry.add('SpanNode', SpanNode);
+Registry.add('BlockNode', BlockNode);
 
 function tokenize(ops) {
   const retVal = [];
