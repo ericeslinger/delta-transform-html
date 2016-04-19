@@ -66,14 +66,14 @@ function tokenize(ops) {
       });
     } else {
       op.insert.split('\n').forEach((subText, i, ary) => {
-        if (subText === '') {
-          return; // end of line was \n
+        console.log(`TEXT: -${subText}-`);
+        if (subText.length > 0) {
+          retVal.push({
+            type: 'text',
+            contents: subText,
+            attributes: op.attributes || {},
+          });
         }
-        retVal.push({
-          type: 'text',
-          contents: subText,
-          attributes: op.attributes || {},
-        });
         if (i < (ary.length - 1)) {
           retVal.push({
             type: 'linebreak',
@@ -102,17 +102,6 @@ function createBlocks(tokens) {
   return retVal;
 }
 
-// function assembleLines(blocks) {
-//   blocks.forEach((block) => {
-//     const blockNode = new block.Type(block); // eslint-disable-line new-cap
-//     retVal.absorb(blockNode);
-//     block.children.forEach((child) => {
-//       blockNode.appendChild(TreeNode.build(child));
-//     });
-//   });
-//   return retVal;
-// }
-
 export function transform(delta) {
   return createBlocks(tokenize(delta.ops)).toHTML();
 }
@@ -122,6 +111,8 @@ export function testDeltas() {
     ops: [
       {insert: 'multiline \n value'},
       {insert: '\n'},
+      {insert: 'simple text'},
+      {insert: '\nfollowing text\n\n'},
       {insert: 'bulleted list one', attributes: {link: 'linkTarget'}},
       {insert: '\n', attributes: {list: 'bullet'}},
       {insert: 'bulleted list two'},
