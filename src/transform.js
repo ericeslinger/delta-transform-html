@@ -66,7 +66,6 @@ function tokenize(ops) {
       });
     } else {
       op.insert.split('\n').forEach((subText, i, ary) => {
-        console.log(`TEXT: -${subText}-`);
         if (subText.length > 0) {
           retVal.push({
             type: 'text',
