@@ -9,7 +9,10 @@ export default class TextNode extends SpanNode {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39');
+    .replace(/'/g, '&#39;');
+    if (this.contents.trim() === '') {
+      this.contents = '&nbsp;';
+    }
   }
 
   openTag() {

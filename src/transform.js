@@ -135,6 +135,9 @@ export function testDeltas() {
       {insert: {image: 'IMAGEURL'}},
       {insert: 'escaped HTML & < > " \' &'},
       {insert: '\n'},
+      {insert: 'empty newline should have nbsp\n\n\n'},
+      {insert: '\n'},
+      {insert: '\n'},
       {insert: 'going NUTS', attributes: {
         italic: true,
         bold: true,
