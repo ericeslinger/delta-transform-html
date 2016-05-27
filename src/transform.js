@@ -105,6 +105,10 @@ export function transform(delta) {
   return createBlocks(tokenize(delta.ops)).toHTML();
 }
 
+export function transformAsync(delta) {
+  return createBlocks(tokenize(delta.ops)).toHTMLAsync();
+}
+
 export function plainText(delta) {
   return createBlocks(tokenize(delta.ops)).plainText();
 }
@@ -167,4 +171,9 @@ export function testDeltas() {
   console.log(transform(testVal));
   console.log('plain text alt');
   console.log(plainText(testVal));
+  transformAsync(testVal)
+  .then((html) => {
+    console.log('async transform');
+    console.log(html);
+  });
 }

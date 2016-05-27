@@ -19,6 +19,24 @@ export default class TreeNode {
     return '';
   }
 
+  promiseContents() {
+    return Promise.resolve(this.contents || '');
+  }
+
+  toHTMLAsync(indentLevel = 0) {
+    if (this.isLeaf()) {
+      return this.promiseContents()
+      .then((contents) => {
+        return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}${contents}${this.closeTag()}`; // eslint-disable-line max-len
+      });
+    } else {
+      return Promise.all(this.children.map((c) => c.toHTMLAsync(indentLevel + 2)))
+      .then((childHTML) => {
+        return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}\n${childHTML.join('\n')}\n${new Array(indentLevel + 1).join(' ')}${this.closeTag()}`; // eslint-disable-line max-len
+      });
+    }
+  }
+
   plainText() {
     return this.children.map((c) => c.plainText()).join('');
   }
