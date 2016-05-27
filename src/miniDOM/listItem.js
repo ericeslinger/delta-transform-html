@@ -10,6 +10,11 @@ export default class ListItemNode extends TreeNode {
   absorb(child) {
     return child;
   }
+
+  plainText() {
+    return `* ${super.plainText()}\n`;
+  }
+
   static matches(token = {}) {
     return false;
     // return (token.attributes && token.attributes.list);

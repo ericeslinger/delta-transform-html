@@ -4,9 +4,6 @@ export default class RootNode extends TreeNode {
   constructor(opts = {}) {
     super(opts);
   }
-  toHTML() {
-    return this.children.map((c) => c.toHTML()).join('\n');
-  }
   absorb(child) {
     let remains = child;
     if (this.children.length > 0) {

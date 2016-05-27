@@ -105,6 +105,10 @@ export function transform(delta) {
   return createBlocks(tokenize(delta.ops)).toHTML();
 }
 
+export function plainText(delta) {
+  return createBlocks(tokenize(delta.ops)).plainText();
+}
+
 export function testDeltas() {
   const testVal = {
     ops: [
@@ -158,4 +162,6 @@ export function testDeltas() {
   console.log('testing uniqueness on sort keys');
   Registry.checkPriorities();
   console.log(transform(testVal));
+  console.log('plain text alt');
+  console.log(plainText(testVal));
 }

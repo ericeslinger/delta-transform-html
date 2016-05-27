@@ -4,6 +4,7 @@ export default class TextNode extends SpanNode {
 
   constructor(opts = {}) {
     super(opts);
+    this.unescapedContents = opts.contents;
     this.contents = (opts.contents || '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -13,6 +14,10 @@ export default class TextNode extends SpanNode {
     if (this.contents.trim() === '') {
       this.contents = '&nbsp;';
     }
+  }
+
+  plainText() {
+    return this.unescapedContents;
   }
 
   openTag() {

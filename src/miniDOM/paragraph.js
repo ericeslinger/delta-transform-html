@@ -19,7 +19,6 @@ export default class ParagraphNode extends BlockNode {
     }
   }
 
-
   static matches(token = {}) {
     return (
       (token.type === 'linebreak') && (

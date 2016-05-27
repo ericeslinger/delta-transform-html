@@ -5,6 +5,9 @@ export default class BlockNode extends TreeNode {
     super(opts);
     this.level = 'block';
   }
+  plainText() {
+    return `${super.plainText()}\n\n`;
+  }
   appendChild(child) {
     if (this.children.length === 0) {
       this.children.push(child);

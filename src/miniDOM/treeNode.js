@@ -19,6 +19,10 @@ export default class TreeNode {
     return '';
   }
 
+  plainText() {
+    return this.children.map((c) => c.plainText()).join('');
+  }
+
   toHTML(indentLevel = 0) {
     if (this.isLeaf()) {
       return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}${this.contents}${this.closeTag()}`; // eslint-disable-line max-len
