@@ -142,6 +142,9 @@ export function testDeltas() {
       {insert: 'empty newline should have nbsp\n\n\n'},
       {insert: '\n'},
       {insert: '\n'},
+      {insert: 'old image style:'},
+      {insert: '1', attributes: {image: 'IMAGEURL'}},
+      {insert: '\n'},
       {insert: 'going NUTS', attributes: {
         italic: true,
         bold: true,

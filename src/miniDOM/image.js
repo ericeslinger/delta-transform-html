@@ -3,7 +3,15 @@ import SpanNode from './span';
 export default class ImageNode extends SpanNode {
   constructor(opts = {}) {
     super(opts);
-    this.contents = `<img src="${opts.contents.image}">`;
+    if (opts.contents && opts.contents.image) {
+      this.imageUrl = opts.contents.image;
+    } else {
+      this.imageUrl = opts.attributes.image;
+    }
+    this.contents = `<img src="${this.imageUrl}">`;
+  }
+  plainText() {
+    return `IMAGE: ${this.imageUrl}`;
   }
   isLeaf() {
     return true;
@@ -15,7 +23,10 @@ export default class ImageNode extends SpanNode {
     return '';
   }
   static matches(token = {}) {
-    return (token.contents && token.contents.image);
+    return (
+      (token.contents && token.contents.image) ||
+      (token.attributes && token.attributes.image)
+    );
   }
 }
 

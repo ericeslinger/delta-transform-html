@@ -37,7 +37,11 @@ export default class TextNode extends SpanNode {
   }
 
   static matches(token = {}) {
-    return ((token.contents) && (typeof token.contents === 'string'));
+    return (
+      (token.contents) &&
+      (typeof token.contents === 'string') &&
+      ((token.attributes === undefined) || (token.attributes.image === undefined))
+    );
   }
 }
 
