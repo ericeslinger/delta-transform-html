@@ -125,7 +125,7 @@ export function testDeltas() {
       {insert: 'numbered list one'},
       {insert: '\n', attributes: {list: 'ordered'}},
       {insert: 'numbered list two'},
-      {insert: '\n', attributes: {list: 'ordered'}},
+      {insert: '\n', attributes: {ordered: true}},
       {insert: 'numbered list three'},
       {insert: '\n', attributes: {list: 'ordered'}},
       {insert: 'header two'},

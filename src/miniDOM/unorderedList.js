@@ -32,7 +32,7 @@ export default class UnorderedListNode extends BlockNode {
     return (
       (token.type === 'linebreak') &&
       token.attributes &&
-      (token.attributes.list === 'bullet')
+      ((token.attributes.list === 'bullet') || (token.attributes.bullet === true))
     );
   }
 }

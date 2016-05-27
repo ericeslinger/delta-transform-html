@@ -30,7 +30,7 @@ export default class OrderedListNode extends BlockNode {
     return (
       (token.type === 'linebreak') &&
       token.attributes &&
-      (token.attributes.list === 'ordered')
+      ((token.attributes.list === 'ordered') || (token.attributes.ordered === true))
     );
   }
 }
