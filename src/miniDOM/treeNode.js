@@ -37,6 +37,18 @@ export default class TreeNode {
     }
   }
 
+  plainTextAsync() {
+    if (this.isLeaf()) {
+      if (this.promisePlainContents) {
+        return this.promisePlainContents();
+      } else {
+        return Promise.resolve(this.plainText());
+      }
+    } else {
+      return Promise.all(this.children.map((c) => c.plainTextAsync())).then((c) => c.join(''));
+    }
+  }
+
   plainText() {
     return this.children.map((c) => c.plainText()).join('');
   }

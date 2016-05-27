@@ -11,6 +11,11 @@ export default class ListItemNode extends TreeNode {
     return child;
   }
 
+  plainTextAsync() {
+    return super.plainTextAsync()
+    .then((t) => `* ${t}\n`);
+  }
+
   plainText() {
     return `* ${super.plainText()}\n`;
   }

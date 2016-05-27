@@ -113,6 +113,10 @@ export function plainText(delta) {
   return createBlocks(tokenize(delta.ops)).plainText();
 }
 
+export function plainTextAsync(delta) {
+  return createBlocks(tokenize(delta.ops)).plainTextAsync();
+}
+
 export function testDeltas() {
   const testVal = {
     ops: [
@@ -175,5 +179,10 @@ export function testDeltas() {
   .then((html) => {
     console.log('async transform');
     console.log(html);
+  });
+  plainTextAsync(testVal)
+  .then((pt) => {
+    console.log('async plain');
+    console.log(pt);
   });
 }

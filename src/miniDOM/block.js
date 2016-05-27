@@ -5,6 +5,12 @@ export default class BlockNode extends TreeNode {
     super(opts);
     this.level = 'block';
   }
+
+  plainTextAsync() {
+    return Promise.all(this.children.map((child) => child.plainTextAsync()))
+    .then((c) => `${c.join('')}\n\n`);
+  }
+
   plainText() {
     return `${super.plainText()}\n\n`;
   }
