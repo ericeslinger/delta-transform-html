@@ -65,15 +65,14 @@ function tokenize(ops) {
         attributes: op.attributes || {},
       });
     } else {
-      op.insert.split('\n').forEach((subText, i, ary) => {
+      op.insert.split('\n').forEach((subText) => {
         if (subText.length > 0) {
           retVal.push({
             type: 'text',
             contents: subText,
             attributes: op.attributes || {},
           });
-        }
-        if (i < (ary.length - 1)) {
+        } else {
           retVal.push({
             type: 'linebreak',
             attributes: {}, // mid-insert linebreaks have no line-level styling
@@ -82,6 +81,7 @@ function tokenize(ops) {
       });
     }
   });
+
   return retVal;
 }
 
@@ -123,6 +123,7 @@ export function testDeltas() {
       {insert: 'multiline \n value'},
       {insert: '\n'},
       {insert: 'simple text'},
+      {insert: ' with a\n'},
       {insert: '\nfollowing text\n\n'},
       {insert: 'bulleted list one', attributes: {link: 'linkTarget'}},
       {insert: '\n', attributes: {list: 'bullet'}},
@@ -147,7 +148,7 @@ export function testDeltas() {
       {insert: {image: 'IMAGEURL'}},
       {insert: 'escaped HTML & < > " \' &'},
       {insert: '\n'},
-      {insert: 'empty newline should have nbsp\n\n\n'},
+      {insert: 'empty newline should have nbsp (four after this)\n\n\n'},
       {insert: '\n'},
       {insert: '\n'},
       {insert: 'old image style:'},
@@ -173,16 +174,16 @@ export function testDeltas() {
   console.log('testing uniqueness on sort keys');
   Registry.checkPriorities();
   console.log(transform(testVal));
-  console.log('plain text alt');
-  console.log(plainText(testVal));
-  transformAsync(testVal)
-  .then((html) => {
-    console.log('async transform');
-    console.log(html);
-  });
-  plainTextAsync(testVal)
-  .then((pt) => {
-    console.log('async plain');
-    console.log(pt);
-  });
+  // console.log('plain text alt');
+  // console.log(plainText(testVal));
+  // transformAsync(testVal)
+  // .then((html) => {
+  //   console.log('async transform');
+  //   console.log(html);
+  // });
+  // plainTextAsync(testVal)
+  // .then((pt) => {
+  //   console.log('async plain');
+  //   console.log(pt);
+  // });
 }
