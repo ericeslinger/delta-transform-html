@@ -65,13 +65,19 @@ function tokenize(ops) {
         attributes: op.attributes || {},
       });
     } else {
-      op.insert.split('\n').forEach((subText) => {
+      op.insert.split('\n').forEach((subText, idx, ary) => {
         if (subText.length > 0) {
           retVal.push({
             type: 'text',
             contents: subText,
             attributes: op.attributes || {},
           });
+          if (idx < ary.length - 1) {
+            retVal.push({
+              type: 'linebreak',
+              attributes: {}, // mid-insert linebreaks have no line-level styling
+            });
+          }
         } else {
           retVal.push({
             type: 'linebreak',
@@ -81,7 +87,6 @@ function tokenize(ops) {
       });
     }
   });
-
   return retVal;
 }
 
@@ -174,16 +179,16 @@ export function testDeltas() {
   console.log('testing uniqueness on sort keys');
   Registry.checkPriorities();
   console.log(transform(testVal));
-  // console.log('plain text alt');
-  // console.log(plainText(testVal));
-  // transformAsync(testVal)
-  // .then((html) => {
-  //   console.log('async transform');
-  //   console.log(html);
-  // });
-  // plainTextAsync(testVal)
-  // .then((pt) => {
-  //   console.log('async plain');
-  //   console.log(pt);
-  // });
+  console.log('plain text alt');
+  console.log(plainText(testVal));
+  transformAsync(testVal)
+  .then((html) => {
+    console.log('async transform');
+    console.log(html);
+  });
+  plainTextAsync(testVal)
+  .then((pt) => {
+    console.log('async plain');
+    console.log(pt);
+  });
 }

@@ -23,7 +23,6 @@ export default class TextNode extends SpanNode {
     }
   }
 
-
   plainText() {
     return this.unescapedContents;
   }
@@ -46,7 +45,7 @@ export default class TextNode extends SpanNode {
 
   absorb(child) {
     if (child.type === this.type) {
-      this.unescapedContents = this.unescapedContents.concat(child.contents);
+      this.unescapedContents = this.unescapedContents.concat(child.unescapedContents);
       return null;
     } else {
       return child;
