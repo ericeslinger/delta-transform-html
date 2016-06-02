@@ -8,11 +8,11 @@ export default class BlockNode extends TreeNode {
 
   plainTextAsync() {
     return Promise.all(this.children.map((child) => child.plainTextAsync()))
-    .then((c) => `${c.join('')}\n\n`);
+    .then((c) => `${c.join('')}\n`);
   }
 
   plainText() {
-    return `${super.plainText()}\n\n`;
+    return `${super.plainText()}\n`;
   }
   appendChild(child) {
     if (this.children.length === 0) {

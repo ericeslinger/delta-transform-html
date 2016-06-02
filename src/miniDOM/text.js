@@ -54,7 +54,7 @@ export default class TextNode extends SpanNode {
 
   static matches(token = {}) {
     return (
-      (token.contents) &&
+      ((token.contents === '') || (token.contents)) &&
       (typeof token.contents === 'string') &&
       ((token.attributes === undefined) || (token.attributes.image === undefined))
     );

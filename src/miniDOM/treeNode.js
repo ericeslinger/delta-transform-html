@@ -1,4 +1,4 @@
-import * as Registry from '../registry';
+import { Registry } from '../index';
 export default class TreeNode {
   constructor(opts = {}) {
     this.children = [];
