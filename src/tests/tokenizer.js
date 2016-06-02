@@ -19,6 +19,50 @@ describe('tokenizer', () => {
     ];
     expect(tokenize(ops)).to.deep.equal(result);
   });
-  it('should convert newlines into styled linebreaks');
-  it('should convert inline newlines into multiple lines');
+
+  it('should convert newlines into styled linebreaks', () => {
+    const ops = [{
+      insert: 'listitem',
+    }, {
+      insert: '\n',
+      attributes: {
+        bullet: true,
+      },
+    }];
+    const result = [
+      {type: 'text', contents: 'listitem', attributes: {}},
+      {type: 'linebreak', attributes: {bullet: true}},
+    ];
+    expect(tokenize(ops)).to.deep.equal(result);
+  });
+
+  it('should convert inline newlines into multiple lines', () => {
+    const ops = [{
+      insert: 'word\nword\n\nword\n',
+    }];
+    const result = [
+      {type: 'text', contents: 'word', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+      {type: 'text', contents: 'word', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+      {type: 'text', contents: 'word', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+    ];
+    expect(tokenize(ops)).to.deep.equal(result);
+  });
+
+  it('should handle inline newlines at the start of the line', () => {
+    const ops = [{
+      insert: '\nword\n\nword',
+    }];
+    const result = [
+      {type: 'linebreak', attributes: {}},
+      {type: 'text', contents: 'word', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+      {type: 'text', contents: 'word', attributes: {}},
+    ];
+    expect(tokenize(ops)).to.deep.equal(result);
+  });
 });

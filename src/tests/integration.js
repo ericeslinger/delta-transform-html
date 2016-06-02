@@ -90,127 +90,125 @@ bold multiline
 valueitalic valuebold-italic value
 `;
 
-const integrationResultHTML = `
-  <p>
-    <span>multiline</span>
-  </p>
-  <p>
-    <span>value</span>
-  </p>
-  <p>
-    <span>simple text with a</span>
-  </p>
-  <p>
-    <span>&nbsp;</span>
-  </p>
-  <p>
-    <span>following text</span>
-  </p>
-  <p>
-    <span>&nbsp;</span>
-  </p>
-  <ul>
-    <li>
-      <a target="_blank" href="linkTarget">
-        <span>bulleted list one</span>
-      </a>
-    </li>
-    <li>
-      <span>bulleted list two</span>
-    </li>
-    <li>
-      <span>bulleted list three</span>
-    </li>
-  </ul>
-  <ol>
-    <li>
-      <span>numbered list one</span>
-    </li>
-    <li>
-      <span>numbered list two</span>
-    </li>
-    <li>
-      <span>numbered list three</span>
-    </li>
-  </ol>
-  <h2>
-    <span>header two</span>
-  </h2>
-  <h1>
-    <u>
-      <span>underlined header one</span>
-    </u>
-  </h1>
-  <p>
-    <span style="color:red;">
-      <span>red</span>
-    </span>
-    <span style="background-color:red;">
-      <span>bgred</span>
-    </span>
-    <s>
-      <span>strikethru</span>
-    </s>
-  </p>
-  <p>
-    <img src="IMAGEURL">
-    <span>escaped HTML &amp; &lt; &gt; &quot; &#39; &amp;</span>
-  </p>
-  <p>
-    <span>empty newline should have nbsp (four after this)</span>
-  </p>
-  <p>
-    <span>&nbsp;</span>
-  </p>
-  <p>
-    <span>&nbsp;</span>
-  </p>
-  <p>
-    <span>&nbsp;</span>
-  </p>
-  <p>
-    <span>&nbsp;</span>
-  </p>
-  <p>
-    <span>old image style:</span>
-    <img src="IMAGEURL">
-  </p>
-  <p>
-    <sup>
-      <sub>
-        <s>
-          <span style="background-color:#000000;">
-            <span style="color:#ffffff;">
-              <u>
-                <em>
-                  <strong>
-                    <span>going NUTS</span>
-                  </strong>
-                </em>
-              </u>
-            </span>
+const integrationResultHTML = `<p>
+  <span>multiline</span>
+</p>
+<p>
+  <span>value</span>
+</p>
+<p>
+  <span>simple text with a</span>
+</p>
+<p>
+  <span>&nbsp;</span>
+</p>
+<p>
+  <span>following text</span>
+</p>
+<p>
+  <span>&nbsp;</span>
+</p>
+<ul>
+  <li>
+    <a target="_blank" href="linkTarget">
+      <span>bulleted list one</span>
+    </a>
+  </li>
+  <li>
+    <span>bulleted list two</span>
+  </li>
+  <li>
+    <span>bulleted list three</span>
+  </li>
+</ul>
+<ol>
+  <li>
+    <span>numbered list one</span>
+  </li>
+  <li>
+    <span>numbered list two</span>
+  </li>
+  <li>
+    <span>numbered list three</span>
+  </li>
+</ol>
+<h2>
+  <span>header two</span>
+</h2>
+<h1>
+  <u>
+    <span>underlined header one</span>
+  </u>
+</h1>
+<p>
+  <span style="color:red;">
+    <span>red</span>
+  </span>
+  <span style="background-color:red;">
+    <span>bgred</span>
+  </span>
+  <s>
+    <span>strikethru</span>
+  </s>
+</p>
+<p>
+  <img src="IMAGEURL">
+  <span>escaped HTML &amp; &lt; &gt; &quot; &#39; &amp;</span>
+</p>
+<p>
+  <span>empty newline should have nbsp (four after this)</span>
+</p>
+<p>
+  <span>&nbsp;</span>
+</p>
+<p>
+  <span>&nbsp;</span>
+</p>
+<p>
+  <span>&nbsp;</span>
+</p>
+<p>
+  <span>&nbsp;</span>
+</p>
+<p>
+  <span>old image style:</span>
+  <img src="IMAGEURL">
+</p>
+<p>
+  <sup>
+    <sub>
+      <s>
+        <span style="background-color:#000000;">
+          <span style="color:#ffffff;">
+            <u>
+              <em>
+                <strong>
+                  <span>going NUTS</span>
+                </strong>
+              </em>
+            </u>
           </span>
-        </s>
-      </sub>
-    </sup>
-  </p>
-  <p>
+        </span>
+      </s>
+    </sub>
+  </sup>
+</p>
+<p>
+  <strong>
+    <span>bold multiline</span>
+  </strong>
+</p>
+<p>
+  <strong>
+    <span>value</span>
+  </strong>
+  <em>
+    <span>italic value</span>
     <strong>
-      <span>bold multiline</span>
+      <span>bold-italic value</span>
     </strong>
-  </p>
-  <p>
-    <strong>
-      <span>value</span>
-    </strong>
-    <em>
-      <span>italic value</span>
-      <strong>
-        <span>bold-italic value</span>
-      </strong>
-    </em>
-  </p>
-`;
+  </em>
+</p>`;
 
 describe('integration', () => {
   it('synchronously output html that meets all specifications', () => {

@@ -29,6 +29,12 @@ export function tokenize(ops) {
             attributes: op.attributes || {},
           });
           contents = '';
+        } else if (nextNewline === 0) {
+          retVal.push({
+            type: 'linebreak',
+            attributes: {}, // mid-insert linebreaks have no line-level styling
+          });
+          contents = contents.slice(nextNewline + 1);
         } else {
           retVal.push({
             type: 'text',
