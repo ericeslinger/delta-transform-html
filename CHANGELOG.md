@@ -3,7 +3,7 @@
 API Extension:
   - Allow TextNode to be subclassed and the escape() function extended.
 
-```
+```javascript
 import { Registry } from 'delta-transform-html';
 export class Text extends Registry.get('text') {
   escape(contents) {
