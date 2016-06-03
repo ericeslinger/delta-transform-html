@@ -153,7 +153,7 @@ const integrationResultHTML = `<p>
 </p>
 <p>
   <img src="IMAGEURL">
-  <span>escaped HTML &amp; &lt; &gt; &#123; &#123; &#125; &#125; &quot; &#39; &amp;</span>
+  <span>escaped HTML &amp; &lt; &gt; \\{\\{ \\}\\} &quot; &#39; &amp;</span>
 </p>
 <p>
   <span>empty newline should have nbsp (four after this)</span>
