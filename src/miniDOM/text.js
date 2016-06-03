@@ -2,6 +2,8 @@ import SpanNode from './span';
 function escape(contents) {
   return contents
   .replace(/&/g, '&amp;')
+  .replace(/{/g, '&#123;')
+  .replace(/}/g, '&#125;')
   .replace(/</g, '&lt;')
   .replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;')

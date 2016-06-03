@@ -35,7 +35,7 @@ const testVal = {
     {insert: 'strikethru', attributes: {strike: true}},
     {insert: '\n'},
     {insert: {image: 'IMAGEURL'}},
-    {insert: 'escaped HTML & < > " \' &'},
+    {insert: 'escaped HTML & < > { } " \' &'},
     {insert: '\n'},
     {insert: 'empty newline should have nbsp (four after this)\n\n\n'},
     {insert: '\n'},
@@ -78,7 +78,7 @@ following text
 header two
 underlined header one
 redbgredstrikethru
-IMAGE: IMAGEURLescaped HTML & < > " ' &
+IMAGE: IMAGEURLescaped HTML & < > { } " ' &
 empty newline should have nbsp (four after this)
 
 
@@ -153,7 +153,7 @@ const integrationResultHTML = `<p>
 </p>
 <p>
   <img src="IMAGEURL">
-  <span>escaped HTML &amp; &lt; &gt; &quot; &#39; &amp;</span>
+  <span>escaped HTML &amp; &lt; &gt; &#123; &#125; &quot; &#39; &amp;</span>
 </p>
 <p>
   <span>empty newline should have nbsp (four after this)</span>
