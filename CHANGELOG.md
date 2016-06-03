@@ -3,14 +3,16 @@
 API Extension:
   - Allow TextNode to be subclassed and the escape() function extended.
 
-    import { Registry } from 'delta-transform-html';
-    export class Text extends Registry.get('text') {
-      escape(contents) {
-        return super.escape(contents)
-        .replace(/{{/g, '{{&quot;{{&quot;}}');
-      }
-    }
-    Registry.add('text', Text);
+```
+import { Registry } from 'delta-transform-html';
+export class Text extends Registry.get('text') {
+  escape(contents) {
+    return super.escape(contents)
+    .replace(/{{/g, '{{&quot;{{&quot;}}');
+  }
+}
+Registry.add('text', Text);
+```
 
 As an example - the above will escape double-curly braces in angular-parsed contexts, in order to prevent
 injection attacks.
