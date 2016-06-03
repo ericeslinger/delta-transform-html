@@ -1,14 +1,4 @@
 import SpanNode from './span';
-function escape(contents) {
-  return contents
-  .replace(/&/g, '&amp;')
-  .replace(/{/g, '\\{')
-  .replace(/}/g, '\\}')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;')
-  .replace(/'/g, '&#39;');
-}
 
 export default class TextNode extends SpanNode {
 
@@ -21,7 +11,7 @@ export default class TextNode extends SpanNode {
     if (this.unescapedContents.trim() === '') {
       return '&nbsp;';
     } else {
-      return escape(this.unescapedContents);
+      return this.escape(this.unescapedContents);
     }
   }
 
@@ -54,6 +44,15 @@ export default class TextNode extends SpanNode {
     }
   }
 
+  escape(contents) {
+    return contents
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+  }
+
   static matches(token = {}) {
     return (
       ((token.contents === '') || (token.contents)) &&
@@ -61,6 +60,7 @@ export default class TextNode extends SpanNode {
       ((token.attributes === undefined) || (token.attributes.image === undefined))
     );
   }
+
 }
 
 TextNode.priority = 0;
