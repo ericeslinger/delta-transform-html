@@ -89,11 +89,12 @@ export default class TreeNode {
     .filter((format) => format.matches(token))
     .map((N) => new N(token));
     if (formatList.length === 0) {
-      throw new Error(`token ${JSON.stringify(token)} has no matching formats`);
+      // throw new Error(`token ${JSON.stringify(token)} has no matching formats`);
+      return new TreeNode();
     }
     const retVal = formatList.shift();
     formatList.reduce((prev, curr) => {
-      prev.children = [curr];
+      prev.children = [curr]; // eslint-disable-line no-param-reassign
       return curr;
     }, retVal);
     return retVal;

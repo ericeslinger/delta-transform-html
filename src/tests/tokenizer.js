@@ -52,9 +52,20 @@ describe('tokenizer', () => {
     expect(tokenize(ops)).to.deep.equal(result);
   });
 
+  it('add a linebreak if there is not one at the end of input', () => {
+    const ops = [{
+      insert: 'word',
+    }];
+    const result = [
+      {type: 'text', contents: 'word', attributes: {}},
+      {type: 'linebreak', attributes: {}},
+    ];
+    expect(tokenize(ops)).to.deep.equal(result);
+  });
+
   it('should handle inline newlines at the start of the line', () => {
     const ops = [{
-      insert: '\nword\n\nword',
+      insert: '\nword\n\nword\n',
     }];
     const result = [
       {type: 'linebreak', attributes: {}},
@@ -62,6 +73,7 @@ describe('tokenizer', () => {
       {type: 'linebreak', attributes: {}},
       {type: 'linebreak', attributes: {}},
       {type: 'text', contents: 'word', attributes: {}},
+      {type: 'linebreak', attributes: {}},
     ];
     expect(tokenize(ops)).to.deep.equal(result);
   });

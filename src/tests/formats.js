@@ -147,6 +147,17 @@ describe('formats', () => {
     const result = '<p>\n  <sub>\n    <span>word</span>\n  </sub>\n</p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
+  it('should ignore unknowns', () => {
+    const delta = {ops: [{
+      attributes: {
+        tuber: 'POTATO',
+      },
+    }, {
+      insert: '\n',
+    }]};
+    const result = '<p>\n  \n\n  \n</p>'; // eslint-disable-line max-len
+    expect(transform.transform(delta)).to.equal(result);
+  });
   it('should format underlines', () => {
     const delta = {ops: [{
       insert: 'word\n',
