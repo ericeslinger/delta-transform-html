@@ -51,8 +51,6 @@ export function tokenize(ops) {
     }
   });
   if ((retVal.length > 0) && (retVal.slice(-1)[0].type !== 'linebreak')) {
-    console.log('ADDING');
-    console.log(JSON.stringify(retVal.slice(-1), null, 2));
     retVal.push({
       type: 'linebreak',
       attributes: {}, // mid-insert linebreaks have no line-level styling

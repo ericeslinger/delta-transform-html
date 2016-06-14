@@ -1,3 +1,9 @@
+## 1.1.1 (2016-06-14)
+Export tokenize and blockize functions
+
+## 1.1.0 (2016-06-08)
+Add unit tests, fix a number of previously-unnoticed bugs
+
 ## 1.0.1 (2016-06-03)
 
 API Extension:

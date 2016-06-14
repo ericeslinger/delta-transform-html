@@ -23,8 +23,11 @@ import SpanNode from './miniDOM/span';
 import BlockNode from './miniDOM/block';
 import ImageNode from './miniDOM/image';
 
-import { tokenize } from './operations/tokenize';
-import { blockize } from './operations/blockize';
+import { tokenize as _tokenize } from './operations/tokenize';
+import { blockize as _blockize } from './operations/blockize';
+
+export const tokenize = _tokenize;
+export const blockize = _blockize;
 
 Registry.add('bold', BoldNode);
 Registry.add('italic', ItalicNode);
