@@ -16,9 +16,9 @@ export default class ParagraphNode extends BlockNode {
     if (this.children.length === 0) {
       this.children.push(new TextNode({type: 'text', attributes: {}, contents: ''}));
     }
-    return Promise.all(this.children.map((c) => c.toHTMLAsync(indentLevel + 2)))
+    return Promise.all(this.children.map((c) => c.toHTMLAsync(0)))
     .then((childHTML) => {
-      return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}\n${childHTML.join('\n')}\n${new Array(indentLevel + 1).join(' ')}${this.closeTag()}`; // eslint-disable-line max-len
+      return `${this.openTag()}${childHTML.join('')}${this.closeTag()}`; // eslint-disable-line max-len
     });
   }
 
@@ -27,9 +27,9 @@ export default class ParagraphNode extends BlockNode {
       this.children.push(new TextNode({type: 'text', attributes: {}, contents: ''}));
     }
     // if (this.children.length === 0) {
-      // return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}&nbsp;${this.closeTag()}`;
+      // return `${new Array(0).join(' ')}${this.openTag()}&nbsp;${this.closeTag()}`;
     // } else {
-      return super.toHTML(indentLevel);
+    return super.toHTML(indentLevel);
     // }
   }
 

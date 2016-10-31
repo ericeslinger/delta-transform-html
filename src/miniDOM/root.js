@@ -16,13 +16,13 @@ export default class RootNode extends TreeNode {
   }
 
   toHTML() {
-    return this.children.map((c) => c.toHTML(0)).join('\n'); // eslint-disable-line max-len
+    return this.children.map((c) => c.toHTML(0)).join(''); // eslint-disable-line max-len
   }
 
   toHTMLAsync() {
     return Promise.all(this.children.map((c) => c.toHTMLAsync(0)))
     .then((childHTML) => {
-      return childHTML.join('\n'); // eslint-disable-line max-len
+      return childHTML.join(''); // eslint-disable-line max-len
     });
   }
 }

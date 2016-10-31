@@ -27,12 +27,12 @@ export default class TreeNode {
     if (this.isLeaf()) {
       return this.promiseContents()
       .then((contents) => {
-        return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}${contents}${this.closeTag()}`; // eslint-disable-line max-len
+        return `${this.openTag()}${contents}${this.closeTag()}`; // eslint-disable-line max-len
       });
     } else {
-      return Promise.all(this.children.map((c) => c.toHTMLAsync(indentLevel + 2)))
+      return Promise.all(this.children.map((c) => c.toHTMLAsync(0)))
       .then((childHTML) => {
-        return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}\n${childHTML.join('\n')}\n${new Array(indentLevel + 1).join(' ')}${this.closeTag()}`; // eslint-disable-line max-len
+        return `${this.openTag()}${childHTML.join('')}${this.closeTag()}`; // eslint-disable-line max-len
       });
     }
   }
@@ -55,9 +55,9 @@ export default class TreeNode {
 
   toHTML(indentLevel = 0) {
     if (this.isLeaf()) {
-      return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}${this.contents}${this.closeTag()}`; // eslint-disable-line max-len
+      return `${this.openTag()}${this.contents}${this.closeTag()}`; // eslint-disable-line max-len
     } else {
-      return `${new Array(indentLevel + 1).join(' ')}${this.openTag()}\n${this.children.map((c) => c.toHTML(indentLevel + 2)).join('\n')}\n${new Array(indentLevel + 1).join(' ')}${this.closeTag()}`; // eslint-disable-line max-len
+      return `${this.openTag()}${this.children.map((c) => c.toHTML(0)).join('')}${this.closeTag()}`; // eslint-disable-line max-len
     }
   }
 
