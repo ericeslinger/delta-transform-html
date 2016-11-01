@@ -16,7 +16,7 @@ describe('formats', () => {
         bg: 'red',
       },
     }]};
-    const result = '<p>\n  <span style="background-color:red;">\n    <span>word</span>\n  </span>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><span style="background-color:red;"><span>word</span></span></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format bold', () => {
@@ -26,7 +26,7 @@ describe('formats', () => {
         bold: true,
       },
     }]};
-    const result = '<p>\n  <strong>\n    <span>word</span>\n  </strong>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><strong><span>word</span></strong></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format foreground color', () => {
@@ -36,7 +36,7 @@ describe('formats', () => {
         color: 'red',
       },
     }]};
-    const result = '<p>\n  <span style="color:red;">\n    <span>word</span>\n  </span>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><span style="color:red;"><span>word</span></span></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format headers', () => {
@@ -48,7 +48,7 @@ describe('formats', () => {
         header: 1,
       },
     }]};
-    const result = '<h1>\n  <span>word</span>\n</h1>'; // eslint-disable-line max-len
+    const result = '<h1><span>word</span></h1>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format images', () => {
@@ -60,7 +60,7 @@ describe('formats', () => {
       insert: '\n',
       attributes: {},
     }]};
-    const result = '<p>\n  <img src="URL">\n</p>'; // eslint-disable-line max-len
+    const result = '<p><img src="URL"></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format italic', () => {
@@ -70,7 +70,7 @@ describe('formats', () => {
         italic: true,
       },
     }]};
-    const result = '<p>\n  <em>\n    <span>word</span>\n  </em>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><em><span>word</span></em></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format links', () => {
@@ -83,7 +83,7 @@ describe('formats', () => {
       insert: '\n',
       attributes: {},
     }]};
-    const result = '<p>\n  <a target="_blank" href="URL">\n    <span>word</span>\n  </a>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><a target="_blank" href="URL"><span>word</span></a></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format ordered lists', () => {
@@ -95,7 +95,7 @@ describe('formats', () => {
         ordered: true,
       },
     }]};
-    const result = '<ol>\n  <li>\n    <span>word</span>\n  </li>\n</ol>'; // eslint-disable-line max-len
+    const result = '<ol><li><span>word</span></li></ol>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format unordered lists', () => {
@@ -107,14 +107,14 @@ describe('formats', () => {
         bullet: true,
       },
     }]};
-    const result = '<ul>\n  <li>\n    <span>word</span>\n  </li>\n</ul>'; // eslint-disable-line max-len
+    const result = '<ul><li><span>word</span></li></ul>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format paragraphs', () => {
     const delta = {ops: [{
       insert: 'word\n',
     }]};
-    const result = '<p>\n  <span>word</span>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><span>word</span></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format strikethrough', () => {
@@ -124,7 +124,7 @@ describe('formats', () => {
         strike: true,
       },
     }]};
-    const result = '<p>\n  <s>\n    <span>word</span>\n  </s>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><s><span>word</span></s></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format superscript', () => {
@@ -134,7 +134,7 @@ describe('formats', () => {
         super: true,
       },
     }]};
-    const result = '<p>\n  <sup>\n    <span>word</span>\n  </sup>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><sup><span>word</span></sup></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format subscript', () => {
@@ -144,7 +144,7 @@ describe('formats', () => {
         sub: true,
       },
     }]};
-    const result = '<p>\n  <sub>\n    <span>word</span>\n  </sub>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><sub><span>word</span></sub></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should ignore unknowns', () => {
@@ -155,7 +155,7 @@ describe('formats', () => {
     }, {
       insert: '\n',
     }]};
-    const result = '<p>\n  \n\n  \n</p>'; // eslint-disable-line max-len
+    const result = '<p></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
   it('should format underlines', () => {
@@ -165,7 +165,7 @@ describe('formats', () => {
         underline: true,
       },
     }]};
-    const result = '<p>\n  <u>\n    <span>word</span>\n  </u>\n</p>'; // eslint-disable-line max-len
+    const result = '<p><u><span>word</span></u></p>'; // eslint-disable-line max-len
     expect(transform.transform(delta)).to.equal(result);
   });
 });
