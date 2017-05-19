@@ -2,7 +2,7 @@
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { tokenize } from '../operations/tokenize';
+import { tokenize } from '../src/index';
 
 chai.use(chaiAsPromised);
 

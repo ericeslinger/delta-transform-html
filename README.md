@@ -30,6 +30,12 @@ This is still under heavy development, and not guaranteed to work yet. Use at yo
     };
     var htmlString = transformer.transform(testVal);
 
+You can request that the output html be wrapped in a root node by passing optiosn to transform (and transformAsync)
+thusly:
+
+    var htmlString = transformer.transform(testVal, { rootNode: 'my-element', rootClass: 'class1 class2'});
+    htmlString === '<my-element class="class1 class2"> ... stuff ... </my-element>'
+
 One can register custom formats by calling `transformer.Registry.add('formatName', FormatterClass);`
 
 FormatterClass should look a bit like:

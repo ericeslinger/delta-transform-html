@@ -1,4 +1,4 @@
 const gulp = require('gulp');
 require('./tasks');
 
-gulp.task('default', ['build']);
+gulp.task('default', gulp.series('clean', 'build'));

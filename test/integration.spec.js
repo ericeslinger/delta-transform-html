@@ -2,7 +2,7 @@
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import * as transform from '../index';
+import * as transform from '../src/index';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;

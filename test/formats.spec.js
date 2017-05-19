@@ -2,13 +2,38 @@
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import * as transform from '../index';
+import * as transform from '../src/index';
 
 chai.use(chaiAsPromised);
 
 const expect = chai.expect;
 
 describe('formats', () => {
+  it('should wrap in a root node on request', () => {
+    const delta = {ops: [{
+      insert: 'word\n',
+      attributes: {
+        bg: 'red',
+      },
+    }]};
+    const result = '<special-thing><p><span style="background-color:red;"><span>word</span></span></p></special-thing>'; // eslint-disable-line max-len
+    expect(transform.transform(delta, {rootNode: 'special-thing'})).to.equal(result);
+  });
+  it('should wrap in a classy root node on request', () => {
+    const delta = {ops: [{
+      insert: 'word\n',
+      attributes: {
+        bg: 'red',
+      },
+    }]};
+    const result = '<special-thing class="potato"><p><span style="background-color:red;"><span>word</span></span></p></special-thing>'; // eslint-disable-line max-len
+    expect(
+      transform.transform(
+        delta,
+        { rootNode: 'special-thing', rootClass: 'potato' }
+      )
+    ).to.equal(result);
+  });
   it('should format background color', () => {
     const delta = {ops: [{
       insert: 'word\n',

@@ -6,10 +6,7 @@ const babel = require('gulp-babel');
 function build() {
   return gulp.src(config.scripts, {cwd: config.src})
   .pipe(sourcemaps.init())
-  .pipe(babel({
-    presets: ['babel-preset-es2015'],
-    plugins: ['transform-es2015-modules-commonjs'],
-  }))
+  .pipe(babel())
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(config.dest));
 }

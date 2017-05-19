@@ -50,12 +50,35 @@ Registry.add('SpanNode', SpanNode);
 Registry.add('BlockNode', BlockNode);
 Registry.add('image', ImageNode);
 
-export function transform(delta) {
-  return blockize(tokenize(delta.ops)).toHTML();
+export function transform(delta, opts = {}) {
+  let openTag = '';
+  let closeTag = '';
+  if (opts.rootNode) {
+    if (opts.rootClass) {
+      openTag = `<${opts.rootNode} class="${opts.rootClass}">`;
+    } else {
+      openTag = `<${opts.rootNode}>`;
+    }
+    closeTag = `</${opts.rootNode}>`;
+  }
+  return `${openTag}${blockize(tokenize(delta.ops)).toHTML()}${closeTag}`;
 }
 
-export function transformAsync(delta) {
-  return blockize(tokenize(delta.ops)).toHTMLAsync();
+export function transformAsync(delta, opts = {}) {
+  return blockize(tokenize(delta.ops)).toHTMLAsync()
+  .then((v) => {
+    let openTag = '';
+    let closeTag = '';
+    if (opts.rootNode) {
+      if (opts.rootClass) {
+        openTag = `<${opts.rootNode} class="${opts.rootClass}">`;
+      } else {
+        openTag = `<${opts.rootNode}>`;
+      }
+      closeTag = `</${opts.rootNode}>`;
+    }
+    return `${openTag}${v}${closeTag}`;
+  });
 }
 
 export function plainText(delta) {
