@@ -1,16 +1,13 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+exports.SubscriptNode = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _span = require('./span');
-
-var _span2 = _interopRequireDefault(_span);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18,39 +15,33 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SubscriptNode = function (_SpanNode) {
-  _inherits(SubscriptNode, _SpanNode);
+var SubscriptNode = exports.SubscriptNode = function (_SpanNode) {
+    _inherits(SubscriptNode, _SpanNode);
 
-  function SubscriptNode() {
-    _classCallCheck(this, SubscriptNode);
+    function SubscriptNode() {
+        _classCallCheck(this, SubscriptNode);
 
-    return _possibleConstructorReturn(this, (SubscriptNode.__proto__ || Object.getPrototypeOf(SubscriptNode)).apply(this, arguments));
-  }
-
-  _createClass(SubscriptNode, [{
-    key: 'openTag',
-    value: function openTag() {
-      return '<sub>';
+        return _possibleConstructorReturn(this, (SubscriptNode.__proto__ || Object.getPrototypeOf(SubscriptNode)).apply(this, arguments));
     }
-  }, {
-    key: 'closeTag',
-    value: function closeTag() {
-      return '</sub>';
-    }
-  }], [{
-    key: 'matches',
-    value: function matches() {
-      var token = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      return token.attributes && token.attributes.sub;
-    }
-  }]);
+    _createClass(SubscriptNode, [{
+        key: 'openTag',
+        value: function openTag() {
+            return '<sub>';
+        }
+    }, {
+        key: 'closeTag',
+        value: function closeTag() {
+            return '</sub>';
+        }
+    }], [{
+        key: 'matches',
+        value: function matches(token) {
+            return token.attributes && token.attributes.sub;
+        }
+    }]);
 
-  return SubscriptNode;
-}(_span2.default);
-
-exports.default = SubscriptNode;
-
+    return SubscriptNode;
+}(_span.SpanNode);
 
 SubscriptNode.priority = 9;
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1pbmlET00vc3Vic2NyaXB0LmpzIl0sIm5hbWVzIjpbIlN1YnNjcmlwdE5vZGUiLCJ0b2tlbiIsImF0dHJpYnV0ZXMiLCJzdWIiLCJwcmlvcml0eSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFBQTs7Ozs7Ozs7Ozs7O0lBRXFCQSxhOzs7Ozs7Ozs7Ozs4QkFDVDtBQUNSLGFBQU8sT0FBUDtBQUNEOzs7K0JBQ1U7QUFDVCxhQUFPLFFBQVA7QUFDRDs7OzhCQUMwQjtBQUFBLFVBQVpDLEtBQVksdUVBQUosRUFBSTs7QUFDekIsYUFBUUEsTUFBTUMsVUFBTixJQUFvQkQsTUFBTUMsVUFBTixDQUFpQkMsR0FBN0M7QUFDRDs7Ozs7O2tCQVRrQkgsYTs7O0FBWXJCQSxjQUFjSSxRQUFkLEdBQXlCLENBQXpCIiwiZmlsZSI6Im1pbmlET00vc3Vic2NyaXB0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFNwYW5Ob2RlIGZyb20gJy4vc3Bhbic7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFN1YnNjcmlwdE5vZGUgZXh0ZW5kcyBTcGFuTm9kZSB7XG4gIG9wZW5UYWcoKSB7XG4gICAgcmV0dXJuICc8c3ViPic7XG4gIH1cbiAgY2xvc2VUYWcoKSB7XG4gICAgcmV0dXJuICc8L3N1Yj4nO1xuICB9XG4gIHN0YXRpYyBtYXRjaGVzKHRva2VuID0ge30pIHtcbiAgICByZXR1cm4gKHRva2VuLmF0dHJpYnV0ZXMgJiYgdG9rZW4uYXR0cmlidXRlcy5zdWIpO1xuICB9XG59XG5cblN1YnNjcmlwdE5vZGUucHJpb3JpdHkgPSA5O1xuIl19

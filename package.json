@@ -1,10 +1,11 @@
 {
   "name": "delta-transform-html",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "A package for converting ottypes/rich-text Deltas to an HTML string",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register test/*.spec.js"
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha  --require ts-node/register test/*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -21,17 +22,25 @@
   },
   "homepage": "https://github.com/ericeslinger/delta-transform-html#readme",
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "del": "^2.2.2",
+    "@types/chai": "^4.0.2",
+    "@types/core-js": "^0.9.42",
+    "@types/knex": "0.0.64",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.47",
+    "@types/quill": "^1.3.3",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.0",
+    "del": "^3.0.0",
     "gulp": "gulpjs/gulp.git#4.0",
-    "gulp-babel": "^6.1.2",
-    "gulp-mocha": "^4.3.1",
+    "gulp-babel": "^7.0.0",
     "gulp-sourcemaps": "^2.6.0",
-    "mocha": "^3.4.1"
+    "gulp-typescript": "^3.2.3",
+    "merge-stream": "^1.0.1",
+    "mocha": "^3.5.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "2.5.2"
   }
 }
